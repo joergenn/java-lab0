@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="lab0.Variant9Test" tests="28" skipped="0" failures="0" errors="0" timestamp="2022-09-13T08:45:30" hostname="ZXC" time="0.05">
+  <properties/>
+  <testcase name="arrayTest[0]([I@5386659f, [I@14028087)" classname="lab0.Variant9Test" time="0.005"/>
+  <testcase name="arrayTest[1]([I@7188af83, [I@6be968ce)" classname="lab0.Variant9Test" time="0.001"/>
+  <testcase name="arrayTest[2]([I@1033576a, [I@303cf2ba)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="booleanTest[0](5, 1, true)" classname="lab0.Variant9Test" time="0.004"/>
+  <testcase name="booleanTest[1](8, 7, true)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="booleanTest[2](-100, 100, false)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="forErrorTest" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="forTest[0](7, 9, 194)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="forTest[1](1, 6, 91)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="ifTest[0](312.123, -421.32, -421.32)" classname="lab0.Variant9Test" time="0.008"/>
+  <testcase name="ifTest[1](3.14, 2.71, 2.71)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="ifTest[2](10.321, 100.321312, 10.321)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="inputTest[0](348, 3)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="inputTest[1](213, 2)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="inputTest[2](-718, -7)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="negativeIntegerTest" classname="lab0.Variant9Test" time="0.005"/>
+  <testcase name="switchErrorTest" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="switchTest[0](21, 6, 22 6)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="switchTest[1](31, 12, 1 1)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="switchTest[2](28, 2, 1 3)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="switchTest[3](31, 1, 1 2)" classname="lab0.Variant9Test" time="0.001"/>
+  <testcase name="twoDimensionArrayTest[0]([[I@740fb309, [[I@7bd7d6d6)" classname="lab0.Variant9Test" time="0.004"/>
+  <testcase name="twoDimensionArrayTest[1]([[I@f1da57d, [[I@194fad1)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="whileErrorTest" classname="lab0.Variant9Test" time="0.005"/>
+  <testcase name="whileTest[0](2, 1)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="whileTest[1](3, 2)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="whileTest[2](20, 3)" classname="lab0.Variant9Test" time="0.0"/>
+  <testcase name="whileTest[3](100, 5)" classname="lab0.Variant9Test" time="0.0"/>
+  <system-out><![CDATA[[I@31ea9581
+[I@247310d0
+[I@4a003cbe
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
