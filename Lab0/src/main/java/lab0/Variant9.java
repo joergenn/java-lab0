@@ -6,7 +6,7 @@ public class Variant9 {
 
     /**
      *
-     * @param x is an integer with absoulute value < 1000 and > 99
+     * @param x is an integer with absolute value < 1000 and > 99
      * @return first digit of the number
      */
 
@@ -18,11 +18,10 @@ public class Variant9 {
     /**
      *
      * @param a, b are integer numbers
-     * @return true, if number is possitive
+     * @return true, if at least one of numbers is odd
      */
     public boolean booleanTask(int a, int b) {
-        boolean c = a % 2 == 1 || b % 2 == 1;
-        return c;
+        return a % 2 == 1 || b % 2 == 1;
     }
 
     /**
@@ -43,7 +42,7 @@ public class Variant9 {
     /**
      *
      * @param d, m are integers representing day and month respectively
-     * @return tommorow's date in format {d,m}
+     * @return tomorrow's date in format {d,m}
      */
     public String caseTask(int d, int m) {
         assert m >= 1 && m <= 12 && d >= 1 && d <= 31: "Invalid day or month";
@@ -79,8 +78,7 @@ public class Variant9 {
                 month = day > d ? month : ++month;
                 break;
         }
-        String res = "" + String.valueOf(day) + " " + String.valueOf(month);
-        return res;
+        return day + " " + month;
     }
 
     /**
@@ -118,15 +116,14 @@ public class Variant9 {
      * @return string that contains all even numbers from the arr in reverse order and count of them
      */
     public int[] arrayTask(int[] arr) {
-        ArrayList<Integer> list = new ArrayList<Integer>();
+        ArrayList<Integer> list = new ArrayList<>();
         for (int j = arr.length-1; j >= 0; j--) {
-            if(arr[j] % 2 == 0){list.add(arr[j]);}
+            if(arr[j] % 2 == 0)list.add(arr[j]);
         }
         int[] res = new int[list.size()];
         for (int i = 0; i < res.length; i++) {
             res[i] = list.get(i);
         }
-        System.out.println(res);
         return res;
     }
 
