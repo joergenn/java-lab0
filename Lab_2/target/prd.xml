@@ -1,0 +1,1 @@
+<Product><barcode>1</barcode><name>Wiskas</name><price>30.99</price><category>Cat food</category><supplier><name>Supplier #1</name><address>Universitetska, 20</address><contactPerson><name>Oleg</name><salary>2300.0</salary><address>Holovna, 195</address><phoneNumber>0990000000</phoneNumber><isInsuranced>true</isInsuranced></contactPerson></supplier></Product>
