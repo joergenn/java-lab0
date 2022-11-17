@@ -110,33 +110,33 @@ public class Lab2Test {
     }
 
     @Test(dataProvider = "jsonListEqualsTestProvider")
-    public void jsonListEqualsTest(String fileName, Object... instances) throws IOException {
-        List<Object> list = new ArrayList<>();
-        for(Object o : instances){
-            list.add(o);
-        }
+    public void jsonListEqualsTest(String fileName, List<Object> list) throws IOException {
         json.writeList(list, "test.json");
         assertEquals(checkFiles(fileName, "test.json"), true);
     }
 
     @DataProvider
     public Object[][] jsonListEqualsTestProvider() {
-        return new Object[][]{{"list_emp.json", employee, employee1, employee2}};
+        List<Object> list = new ArrayList<>();
+        list.add(employee);
+        list.add(employee1);
+        list.add(employee2);
+        return new Object[][]{{"list_emp.json", list}};
     }
 
     @Test(dataProvider = "jsonListNotEqualsTestProvider")
-    public void jsonListNotEqualsTest(String fileName, Object... instances) throws IOException {
-        List<Object> list = new ArrayList<>();
-        for(Object o : instances){
-            list.add(o);
-        }
+    public void jsonListNotEqualsTest(String fileName, List<Object> list) throws IOException {
         json.writeList(list, "test.json");
         assertEquals(checkFiles(fileName, "test.json"), false);
     }
 
     @DataProvider
     public Object[][] jsonListNotEqualsTestProvider() {
-        return new Object[][]{{"list_emp.json", employee, employee1, notEqualEmployee}};
+        List<Object> list = new ArrayList<>();
+        list.add(employee);
+        list.add(employee1);
+        list.add(notEqualEmployee);
+        return new Object[][]{{"list_emp.json", list}};
     }
 
     @Test(dataProvider = "jsonDeserializedEqualityTestProvider")
