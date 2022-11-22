@@ -1,9 +1,6 @@
 package lab3;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Supplier implements Comparable<Supplier>{
@@ -11,6 +8,10 @@ public class Supplier implements Comparable<Supplier>{
     private String address;
     private Employee contactPerson;
     private List<Product> products;
+
+    Supplier(){
+
+    }
 
     /**
      * Supplier constructor
@@ -184,6 +185,94 @@ public class Supplier implements Comparable<Supplier>{
     public static List<Product> getProductsWithPriceLessThan(Supplier s, double price){
         return s.getProducts().stream()
                 .filter(product -> product.getPrice() < price)
+                .sorted()
                 .collect(Collectors.toList());
     }
+
+    public static List<Product> getProductsWithPriceLessThanFor(Supplier s, double price){
+        List<Product> products = new ArrayList<>();
+        for(Product p : s.getProducts()){
+            if (p.getPrice() < price) products.add(p);
+        }
+        Collections.sort(products);
+        return products;
+    }
+
+    public static List<Product> getProductsWithQuantityLessThan(Supplier s, int quantity){
+        return s.getProducts().stream()
+                .filter(product -> product.getQuantity() < quantity)
+                .sorted(new ProductComparator())
+                .collect(Collectors.toList());
+    }
+
+    public static List<Product> getProductsWithQuantityLessThanFor(Supplier s, int quantity){
+        List<Product> products = new ArrayList<>();
+        for(Product p : s.getProducts()){
+            if (p.getQuantity() <quantity) products.add(p);
+        }
+        Collections.sort(products, new ProductComparator());
+        return products;
+    }
+
+    public static double getSumOfPricesIncreasedByRatio(Supplier s, double ratio){
+        return s.getProducts().stream()
+                .map(Product::getPrice)
+                .reduce(0.0, (total, price) -> total + price) * ratio;
+
+    }
+
+    public static double getSumOfPricesIncreasedByRatioFor(Supplier s, double ratio){
+        double sumOfPrice = 0.0;
+        for (Product p : s.getProducts()){
+            sumOfPrice += p.getPrice();
+        }
+        return sumOfPrice *= ratio;
+    }
+
+    public static int getQuantityOfProductsMoreExpensiveThan(Supplier s, double price){
+        return s.getProducts().stream()
+                .filter(product -> product.getPrice() > price)
+                .map(Product::getQuantity)
+                .reduce(0, (total, quantity) -> total + quantity);
+    }
+
+    public static int getQuantityOfProductsMoreExpensiveThanFor(Supplier s, double price){
+        int quantity = 0;
+        for (Product p: s.getProducts()) {
+            if(p.getPrice() > price){
+                quantity += p.getQuantity();
+            }
+        }
+        return quantity;
+    }
+
+    public static Product getProductByBarcode(Supplier s, int barcode){
+        return s.getProducts().stream()
+                .filter(product -> product.getBarcode() == barcode)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public static Product getProductByBarcodeFor(Supplier s, int barcode){
+        for(Product p : s.getProducts()){
+            if(p.getBarcode() == barcode){
+                return p;
+            }
+        }
+        return null;
+    }
+    public static double getSumOfPrices(Supplier s){
+        return s.getProducts().stream()
+                .map(Product::getPrice)
+                .reduce(0.0, (total, price) -> total + price);
+    }
+
+    public static double getSumOfPricesFor(Supplier s){
+        double sum = 0.0;
+        for (Product p: s.getProducts()) {
+           sum += p.getPrice();
+        }
+        return sum;
+    }
 }
+

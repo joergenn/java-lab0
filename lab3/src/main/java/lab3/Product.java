@@ -5,7 +5,7 @@ public class Product implements Comparable<Product>{
     private String name;
     private double price;
     private String category;
-    private Supplier supplier;
+    private int quantity;
 
     /**
      * Product constructor
@@ -16,7 +16,7 @@ public class Product implements Comparable<Product>{
         this.name = builder.name;
         this.price = builder.price;
         this.category = builder.category;
-        this.supplier = builder.supplier;
+        this.quantity = builder.quantity;
     }
 
     /**
@@ -25,7 +25,7 @@ public class Product implements Comparable<Product>{
      */
     @Override
     public String toString(){
-        return name + " | " + barcode + " | " + name + " | " + price + " | " + category + " | Supplier: " + supplier.getName();
+        return barcode + " | " + name + " | " + quantity + " | " + price + " | " + category;
     }
 
     /**
@@ -69,7 +69,7 @@ public class Product implements Comparable<Product>{
 
         private double price = 0.0;
         private String category = "NULL";
-        private Supplier supplier = new Supplier.SupplierBuilder("none").build();
+        private int quantity = 0;
 
         /**
          * Builder constructor with required parameters
@@ -101,12 +101,12 @@ public class Product implements Comparable<Product>{
         }
 
         /**
-         * Builder supplier setter
-         * @param supplier
+         * Builder quantity setter
+         * @param quantity
          * @return object
          */
-        public ProductBuilder setSupplier(Supplier supplier) {
-            this.supplier = supplier;
+        public ProductBuilder setQuantity(int quantity) {
+            this.quantity = quantity;
             return this;
         }
 
@@ -149,10 +149,10 @@ public class Product implements Comparable<Product>{
     }
 
     /**
-     * supplier getter
+     *  quantity getter
      */
-    public Supplier getSupplier(){
-        return supplier;
+    public int getQuantity(){
+        return quantity;
     }
 
     /**
@@ -171,10 +171,8 @@ public class Product implements Comparable<Product>{
     public void setPrice(double price) { this.price = price; }
 
     /**
-     * supplier setter
+     * quantity setter
      */
-    public void setSupplier(Supplier supplier){
-        this.supplier = supplier;
-    }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
 
 }

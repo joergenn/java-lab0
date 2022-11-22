@@ -1,10 +1,11 @@
 package lab3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static lab3.Supplier.getProductsWithPriceLessThan;
+import static lab3.Supplier.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,11 +33,11 @@ public class Main {
                 .setContactPerson(employee1)
                 .build();
 
-        Supplier supplier2 = new Supplier.SupplierBuilder("bnufibeadfb")
+        Supplier supplier2 = new Supplier.SupplierBuilder("Cat Food Supplier")
                 .setAddress("Nezalezhnosti, 147")
                 .build();
 
-        Supplier supplier3 = new Supplier.SupplierBuilder("hdsfhdsfh")
+        Supplier supplier3 = new Supplier.SupplierBuilder("Dog Food Supplier")
                 .setAddress("Universitetska,20")
                 .setContactPerson(employee1)
                 .build();
@@ -45,25 +46,33 @@ public class Main {
                 .setAddress("Nezalezhnosti, 147")
                 .build();
 
+        Supplier supplier5 = new Supplier.SupplierBuilder("Supplier #1")
+                .setAddress("Universitetska,20")
+                .setContactPerson(employee1)
+                .build();
+
         Product product1 = new Product.ProductBuilder(1, "Wiskas")
                 .setPrice(70.99)
                 .setCategory("Cat food")
-                .setSupplier(supplier1)
+                .setQuantity(10)
                 .build();
 
         Product product2 = new Product.ProductBuilder(2, "Pedigree")
                 .setPrice(360.00)
                 .setCategory("Dog food")
+                .setQuantity(15)
                 .build();
 
-        Product product3 = new Product.ProductBuilder(1, "Wiskas")
+        Product product3 = new Product.ProductBuilder(3, "Wiskas")
                 .setPrice(30.99)
                 .setCategory("Cat food")
+                .setQuantity(40)
                 .build();
 
-        Product product4 = new Product.ProductBuilder(1, "Wiskas")
+        Product product4 = new Product.ProductBuilder(4, "Wiskas")
                 .setPrice(130.99)
                 .setCategory("Cat food")
+                .setQuantity(22)
                 .build();
 
         List<Product> products = new ArrayList<>();
@@ -71,38 +80,74 @@ public class Main {
         products.add(product2);
         products.add(product3);
         products.add(product4);
-        for(Product product : products){
-            System.out.println(product);
-        }
-        Collections.sort(products);
-        for(Product product : products){
-            System.out.println(product);
-        }
+        System.out.println(products);
 
-        List<Supplier> suppliers = new ArrayList<>();
-        suppliers.add(supplier1);
-        suppliers.add(supplier2);
-        suppliers.add(supplier3);
-        suppliers.add(supplier4);
-        for(Supplier s : suppliers){
-            System.out.println(s);
-        }
-        Collections.sort(suppliers);
-        for(Supplier s : suppliers){
-            System.out.println(s);
-        }
+        supplier5.setProducts(products);
 
-        Supplier supplier5 = new Supplier.SupplierBuilder("Supplier #1")
-                .setAddress("Universitetska,20")
-                .setContactPerson(employee1)
-                .setProducts(products)
-                .build();
-        List<Product> prds = new ArrayList<>();
-        prds = getProductsWithPriceLessThan(supplier5, 100);
-        for(Product p : prds){
-            System.out.println(p);
-        }
-//        System.out.println(getProductsWithPriceLessThan(supplier5, 100));
+//        Collections.sort(products);
+//        for(Product product : products){
+//            System.out.println(product);
+//        }
+//        System.out.println();
+//        Collections.sort(products, new ProductComparator());
+//        for(Product product : products){
+//            System.out.println(product);
+//        }
+
+
+//        List<Supplier> suppliers = new ArrayList<>();
+//        suppliers.add(supplier1);
+//        suppliers.add(supplier2);
+//        suppliers.add(supplier3);
+//        suppliers.add(supplier4);
+//
+//        for(Supplier s : suppliers){
+//            System.out.println(s);
+//        }
+//        Collections.sort(suppliers);
+//        for(Supplier s : suppliers){
+//            System.out.println(s);
+//        }
+
+
+        List<Product> prds = getProductsWithPriceLessThan(supplier5, 100);
+
+//        System.out.println();
+//        prds = getProductsWithPriceLessThan(supplier5, 100);
+//        for(Product p : prds){
+//            System.out.println(p);
+//        }
+//        System.out.println();
+//        prds = getProductsWithPriceLessThanFor(supplier5, 100);
+//        for(Product p : prds){
+//            System.out.println(p);
+//        }
+//
+//        System.out.println();
+//        prds = getProductsWithQuantityLessThan(supplier5, 20);
+//        for(Product p : prds){
+//            System.out.println(p);
+//        }
+//        System.out.println();
+//        prds = getProductsWithQuantityLessThanFor(supplier5, 20);
+//        for(Product p : prds){
+//            System.out.println(p);
+//        }
+
+
+//        System.out.println(getSumOfPrices(supplier5));
+//        System.out.println(getSumOfPricesFor(supplier5));
+//
+//        System.out.println(getProductByBarcode(supplier5, 1));
+//        System.out.println(getProductByBarcodeFor(supplier5, 1));
+//
+//        System.out.println(getQuantityOfProductsMoreExpensiveThan(supplier5, 100.0));
+//        System.out.println(getQuantityOfProductsMoreExpensiveThanFor(supplier5, 100.0));
+
+        System.out.println(getSumOfPricesIncreasedByRatio(supplier5, 1.5));
+        System.out.println(getSumOfPricesIncreasedByRatioFor(supplier5, 1.5));
+
+
 
 //        System.out.println(employee2);
 //        System.out.println(employee1);
