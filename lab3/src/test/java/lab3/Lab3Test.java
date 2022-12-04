@@ -1,7 +1,8 @@
 package lab3;
 
 import static lab3.Supplier.*;
-import static lab3.Supplier.getSumOfPrices;
+
+//import static lab3.Supplier.getSumOfPrices;
 import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.DataProvider;
@@ -61,6 +62,8 @@ public class Lab3Test {
             .setProducts(products)
             .build();
 
+    SupplierService service = new SupplierService(supplier5);
+
     @Test(dataProvider = "productCompareProvider")
     public void productCompareTest(Product p1, Product p2, int res){
         assertEquals(p1.compareTo(p2), res);
@@ -72,123 +75,123 @@ public class Lab3Test {
     }
 
     @Test(dataProvider = "getProductsWithPriceLessThanProvider")
-    public void getProductsWithPriceLessThanTest(Supplier s, int quantity, List<Product> l){
-        assertEquals(checkList(getProductsWithPriceLessThan(s, quantity), l), true);
+    public void getProductsWithPriceLessThanTest(double price, List<Product> l){
+        assertEquals(checkList(service.getProductsWithPriceLessThan(price), l), true);
     }
 
     @DataProvider
     public Object[][] getProductsWithPriceLessThanProvider() {
-        return new Object[][]{{supplier5, 100, Arrays.asList(product3, product1)}};
+        return new Object[][]{{100.0, Arrays.asList(product3, product1)}};
     }
 
     @Test(dataProvider = "getProductsWithPriceLessThanForProvider")
-    public void getProductsWithPriceLessThanForTest(Supplier s, int quantity, List<Product> l){
-        assertEquals(checkList(getProductsWithPriceLessThan(s, quantity), l), true);
+    public void getProductsWithPriceLessThanForTest(double price, List<Product> l){
+        assertEquals(checkList(service.getProductsWithPriceLessThanFor(price), l), true);
     }
 
     @DataProvider
     public Object[][] getProductsWithPriceLessThanForProvider() {
-        return new Object[][]{{supplier5, 100, Arrays.asList(product3, product1)}};
+        return new Object[][]{{100.0, Arrays.asList(product3, product1)}};
     }
 
     @Test(dataProvider = "getProductsWithQuantityLessThanProvider")
-    public void getProductsWithQuantityLessThanTest(Supplier s, int quantity, List<Product> l){
-        assertEquals(checkList(getProductsWithQuantityLessThan(s, quantity), l), true);
+    public void getProductsWithQuantityLessThanTest(int quantity, List<Product> l){
+        assertEquals(checkList(service.getProductsWithQuantityLessThan(quantity), l), true);
     }
 
     @DataProvider
     public Object[][] getProductsWithQuantityLessThanProvider() {
-        return new Object[][]{{supplier5, 20, Arrays.asList(product2, product1)}};
+        return new Object[][]{{20, Arrays.asList(product2, product1)}};
     }
 
     @Test(dataProvider = "getProductsWithQuantityLessThanForProvider")
-    public void getProductsWithQuantityLessThanForTest(Supplier s, int quantity, List<Product> l){
-        assertEquals(checkList(getProductsWithQuantityLessThanFor(s, quantity), l), true);
+    public void getProductsWithQuantityLessThanForTest(int quantity, List<Product> l){
+        assertEquals(checkList(service.getProductsWithQuantityLessThanFor(quantity), l), true);
     }
 
     @DataProvider
     public Object[][] getProductsWithQuantityLessThanForProvider() {
-        return new Object[][]{{supplier5, 20, Arrays.asList(product2, product1)}};
+        return new Object[][]{{20, Arrays.asList(product2, product1)}};
     }
 
     @Test(dataProvider = "getSumOfPricesProvider")
-    public void getSumOfPricesTest(Supplier s, double sum){
-        assertEquals(getSumOfPrices(s), sum);
+    public void getSumOfPricesTest(double sum){
+        assertEquals(service.getSumOfPrices(), sum);
     }
 
     @DataProvider
     public Object[][] getSumOfPricesProvider() {
-        return new Object[][]{{supplier5, 592.97}};
+        return new Object[][]{{592.97}};
     }
 
     @Test(dataProvider = "getSumOfPricesForProvider")
-    public void getSumOfPricesForTest(Supplier s, double sum){
-        assertEquals(getSumOfPricesFor(s), sum);
+    public void getSumOfPricesForTest(double sum){
+        assertEquals(service.getSumOfPricesFor(), sum);
     }
 
     @DataProvider
     public Object[][] getSumOfPricesForProvider() {
-        return new Object[][]{{supplier5, 592.97}};
+        return new Object[][]{{592.97}};
     }
 
     @Test(dataProvider = "getProductByBarcodeProvider")
-    public void getProductByBarcodeTest(Supplier s, int barcode, Product p){
-        assertEquals(getProductByBarcode(s, barcode).equals(p), true);
+    public void getProductByBarcodeTest(int barcode, Product p){
+        assertEquals(service.getProductByBarcode(barcode).equals(p), true);
     }
 
     @DataProvider
     public Object[][] getProductByBarcodeProvider() {
-        return new Object[][]{{supplier5, 1, product1}, {supplier5, 4, product4}};
+        return new Object[][]{{1, product1}, {4, product4}};
     }
 
     @Test(dataProvider = "getProductByBarcodeForProvider")
-    public void getProductByBarcodeForTest(Supplier s, int barcode, Product p){
-        assertEquals(getProductByBarcodeFor(s, barcode).equals(p), true);
+    public void getProductByBarcodeForTest(int barcode, Product p){
+        assertEquals(service.getProductByBarcodeFor(barcode).equals(p), true);
     }
 
     @DataProvider
     public Object[][] getProductByBarcodeForProvider() {
-        return new Object[][]{{supplier5, 2, product2}, {supplier5, 3, product3}};
+        return new Object[][]{{2, product2}, {3, product3}};
     }
 
     @Test(dataProvider = "getQuantityOfProductsMoreExpensiveThanProvider")
-    public void getQuantityOfProductsMoreExpensiveThanTest(Supplier s, double price, int quantity){
-        assertEquals(getQuantityOfProductsMoreExpensiveThan(s, price), quantity);
+    public void getQuantityOfProductsMoreExpensiveThanTest( double price, int quantity){
+        assertEquals(service.getQuantityOfProductsMoreExpensiveThan(price), quantity);
     }
 
     @DataProvider
     public Object[][] getQuantityOfProductsMoreExpensiveThanProvider() {
-        return new Object[][]{{supplier5, 100.0, 37}};
+        return new Object[][]{{100.0, 37}};
     }
 
     @Test(dataProvider = "getQuantityOfProductsMoreExpensiveThanForProvider")
-    public void getQuantityOfProductsMoreExpensiveThanForTest(Supplier s, double price, int quantity){
-        assertEquals(getQuantityOfProductsMoreExpensiveThanFor(s, price), quantity);
+    public void getQuantityOfProductsMoreExpensiveThanForTest(double price, int quantity){
+        assertEquals(service.getQuantityOfProductsMoreExpensiveThanFor(price), quantity);
     }
 
     @DataProvider
     public Object[][] getQuantityOfProductsMoreExpensiveThanForProvider() {
-        return new Object[][]{{supplier5, 100.0, 37}};
+        return new Object[][]{{100.0, 37}};
     }
 
     @Test(dataProvider = "getSumOfPricesIncreasedByRatioProvider")
-    public void getSumOfPricesIncreasedByRatioTest(Supplier s, double ratio, double sum){
-        assertEquals(getSumOfPricesIncreasedByRatio(s, ratio), sum);
+    public void getSumOfPricesIncreasedByRatioTest(double ratio, double sum){
+        assertEquals(service.getSumOfPricesIncreasedByRatio(ratio), sum);
     }
 
     @DataProvider
     public Object[][] getSumOfPricesIncreasedByRatioProvider() {
-        return new Object[][]{{supplier5, 1.5, 889.455}};
+        return new Object[][]{{1.5, 889.455}};
     }
 
     @Test(dataProvider = "getSumOfPricesIncreasedByRatioForProvider")
-    public void getSumOfPricesIncreasedByRatioForTest(Supplier s, double ratio, double sum){
-        assertEquals(getSumOfPricesIncreasedByRatioFor(s, ratio), sum);
+    public void getSumOfPricesIncreasedByRatioForTest(double ratio, double sum){
+        assertEquals(service.getSumOfPricesIncreasedByRatioFor(ratio), sum);
     }
 
     @DataProvider
     public Object[][] getSumOfPricesIncreasedByRatioForProvider() {
-        return new Object[][]{{supplier5, 1.5, 889.455}};
+        return new Object[][]{{1.5, 889.455}};
     }
 
 }

@@ -1,11 +1,11 @@
-package lab3;
+package lab5;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static lab3.Supplier.*;
+import static lab5.Supplier.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -84,86 +84,6 @@ public class Main {
 
         supplier5.setProducts(products);
 
-        SupplierService service = new SupplierService(supplier5);
 
-//        Collections.sort(products);
-//        for(Product product : products){
-//            System.out.println(product);
-//        }
-//        System.out.println();
-//        Collections.sort(products, new ProductPriceComparator());
-//        for(Product product : products){
-//            System.out.println(product);
-//        }
-
-
-//        List<Supplier> suppliers = new ArrayList<>();
-//        suppliers.add(supplier1);
-//        suppliers.add(supplier2);
-//        suppliers.add(supplier3);
-//        suppliers.add(supplier4);
-//
-//        for(Supplier s : suppliers){
-//            System.out.println(s);
-//        }
-//        Collections.sort(suppliers);
-//        for(Supplier s : suppliers){
-//            System.out.println(s);
-//        }
-
-
-        List<Product> prds = service.getProductsWithPriceLessThan(100);
-
-//        System.out.println();
-//        prds = getProductsWithPriceLessThan(supplier5, 100);
-//        for(Product p : prds){
-//            System.out.println(p);
-//        }
-//        System.out.println();
-//        prds = getProductsWithPriceLessThanFor(supplier5, 100);
-//        for(Product p : prds){
-//            System.out.println(p);
-//        }
-//
-//        System.out.println();
-//        prds = getProductsWithQuantityLessThan(supplier5, 20);
-//        for(Product p : prds){
-//            System.out.println(p);
-//        }
-//        System.out.println();
-//        prds = getProductsWithQuantityLessThanFor(supplier5, 20);
-//        for(Product p : prds){
-//            System.out.println(p);
-//        }
-
-
-//        System.out.println(getSumOfPrices(supplier5));
-//        System.out.println(getSumOfPricesFor(supplier5));
-//
-//        System.out.println(getProductByBarcode(supplier5, 1));
-//        System.out.println(getProductByBarcodeFor(supplier5, 1));
-//
-//        System.out.println(getQuantityOfProductsMoreExpensiveThan(supplier5, 100.0));
-//        System.out.println(getQuantityOfProductsMoreExpensiveThanFor(supplier5, 100.0));
-
-        System.out.println(service.getSumOfPricesIncreasedByRatio(1.5));
-        System.out.println(service.getSumOfPricesIncreasedByRatioFor(1.5));
-
-
-
-//        System.out.println(employee2);
-//        System.out.println(employee1);
-//        System.out.println(employee1.equals(employee2));
-//        System.out.println(employee1.equals(employee3));
-//
-//        System.out.println(product1);
-//        System.out.println(product2);
-//        System.out.println(product1.equals(product2));
-//        System.out.println(product1.equals(product3));
-//
-//        System.out.println(supplier1);
-//        System.out.println(supplier2);
-//        System.out.println(supplier1.equals(supplier2));
-//        System.out.println(supplier1.equals(supplier3));
     }
 }

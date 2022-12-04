@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'org.testng', name: 'testng', version: '7.6.1'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.5.0'
+}
+
+test {
+    useTestNG()
+}

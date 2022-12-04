@@ -1,4 +1,4 @@
-package lab3;
+package lab5;
 
 public class Product implements Comparable<Product>{
     private final int barcode;
@@ -52,10 +52,9 @@ public class Product implements Comparable<Product>{
 
     @Override
     public int compareTo(Product p) {
-        return Double.compare(this.price, p.getPrice());
-//        if(Math.abs(this.price - p.price) < 0.00001) return 0;
-//        else if(this.price > p.price) return 1;
-//        else return -1;
+        if(Math.abs(this.price - p.price) < 0.00001) return 0;
+        else if(this.price > p.price) return 1;
+        else return -1;
     }
 
     /**
