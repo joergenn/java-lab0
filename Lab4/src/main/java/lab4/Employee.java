@@ -98,6 +98,12 @@ public class Employee {
             this.name = name;
         }
 
+        /**
+         * Builder name setter
+         * @param name
+         * @return object
+         */
+
         public EmployeeBuilder setName(String name) {
             this.name = name;
             return this;

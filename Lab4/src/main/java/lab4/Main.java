@@ -1,12 +1,5 @@
 package lab4;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import static lab4.Supplier.*;
-
 public class Main {
     public static void main(String[] args) {
         Employee.EmployeeBuilder employeeBuilder = new Employee.EmployeeBuilder("Oleg")

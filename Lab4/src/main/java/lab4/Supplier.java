@@ -5,7 +5,6 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.constraints.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Supplier implements Comparable<Supplier>{
     private String name;
@@ -86,7 +85,7 @@ public class Supplier implements Comparable<Supplier>{
         @NotBlank(message = "Address can't be empty")
         private String address = "none";
 
-        @NotNull
+        @NotNull(message = "Contact person can't be null")
         private Employee contactPerson = new Employee.EmployeeBuilder("None").build();
 
 
@@ -98,6 +97,11 @@ public class Supplier implements Comparable<Supplier>{
             this.name = name;
         }
 
+        /**
+         * Builder name setter
+         * @param name
+         * @return object
+         */
         public SupplierBuilder setName(String name) {
             this.name = name;
             return this;

@@ -1,16 +1,7 @@
 package lab4;
 
-import static lab4.Supplier.*;
-
-//import static lab3.Supplier.getSumOfPrices;
-import static org.testng.Assert.assertEquals;
-
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Lab4Test {
     Employee.EmployeeBuilder empBuilder = new Employee.EmployeeBuilder("Oleg")

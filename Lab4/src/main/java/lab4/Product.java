@@ -3,13 +3,11 @@ package lab4;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Product implements Comparable<Product>{
     private final int barcode;
@@ -64,9 +62,6 @@ public class Product implements Comparable<Product>{
     @Override
     public int compareTo(Product p) {
         return Double.compare(this.price, p.getPrice());
-//        if(Math.abs(this.price - p.price) < 0.00001) return 0;
-//        else if(this.price > p.price) return 1;
-//        else return -1;
     }
 
     /**
@@ -105,11 +100,21 @@ public class Product implements Comparable<Product>{
             this.name = name;
         }
 
+        /**
+         * Builder barcode setter
+         * @param barcode
+         * @return object
+         */
         public ProductBuilder setBarcode(int barcode) {
             this.barcode = barcode;
             return this;
         }
 
+        /**
+         * Builder name setter
+         * @param name
+         * @return object
+         */
         public ProductBuilder setName(String name) {
             this.name = name;
             return this;
