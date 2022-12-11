@@ -78,15 +78,14 @@ public class Supplier implements Comparable<Supplier>{
         /**
          * @param name is mandatory, others are optional
          */
-        @NotEmpty(message = "Name can't be empty")
         @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters long")
         private String name;
 
         @NotBlank(message = "Address can't be empty")
-        private String address = "none";
+        private String address;
 
         @NotNull(message = "Contact person can't be null")
-        private Employee contactPerson = new Employee.EmployeeBuilder("None").build();
+        private Employee contactPerson;
 
 
         /**
@@ -135,12 +134,12 @@ public class Supplier implements Comparable<Supplier>{
             Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
             Set<ConstraintViolation<Supplier.SupplierBuilder>> constraintViolations = validator.validate(this);
 
-            String exceptions = "\n";
+            StringBuilder exceptions = new StringBuilder("\n");
             for(ConstraintViolation constraintViolation : constraintViolations) {
                 String fieldName = constraintViolation.getPropertyPath().toString().toUpperCase();
-                exceptions += fieldName + " " + constraintViolation.getMessage() + "\n";
+                exceptions.append(fieldName).append(" ").append(constraintViolation.getMessage()).append("\n");
             }
-            if(exceptions != "\n")throw new IllegalArgumentException(exceptions);
+            if(constraintViolations.size() > 0)throw new IllegalArgumentException(String.valueOf(exceptions));
 
             return new Supplier(this);
         }

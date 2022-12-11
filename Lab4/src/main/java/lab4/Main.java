@@ -2,18 +2,18 @@ package lab4;
 
 public class Main {
     public static void main(String[] args) {
-        Employee.EmployeeBuilder employeeBuilder = new Employee.EmployeeBuilder("Oleg")
-                .setSalary(6100.0)
-                .setAddress("Holovna, 195")
-                .setPhoneNumber("380950000000")
+        Employee.EmployeeBuilder employeeBuilder = new Employee.EmployeeBuilder("gsakgddsg Smithers")
+                .setSalary(100.0)
+                .setAddress("")
+                .setPhoneNumber("3809500000009999999")
                 .setIsInsuranced(true);
 
         Employee employee1 = employeeBuilder.build();
         System.out.println(employee1);
 
         Supplier.SupplierBuilder supplierBuilder = new Supplier.SupplierBuilder("fdbeang")
-                .setAddress("Universitetska,20");
-//                .setContactPerson(employee1);
+                .setAddress("Universitetska,20")
+                .setContactPerson(employee1);
 
         Supplier supplier1 = supplierBuilder.build();
         System.out.println(supplier1);

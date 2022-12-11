@@ -81,15 +81,15 @@ public class Product implements Comparable<Product>{
 
         @NotNull
         @Min(value = 0, message = "Price can't be less than 0")
-        private double price = 0.0;
+        private double price;
 
         @NotEmpty(message = "Category can't be empty")
-        private String category = "none";
+        private String category;
 
         @NotNull
         @Min(value = 0, message = "Quantity can't be less than 0")
         @Max(value = 100000, message = "Quantity must be less than 100000")
-        private int quantity = 0;
+        private int quantity;
 
         /**
          * Builder constructor with required parameters
@@ -158,12 +158,12 @@ public class Product implements Comparable<Product>{
             Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
             Set<ConstraintViolation<ProductBuilder>> constraintViolations = validator.validate(this);
 
-            String exceptions = "\n";
+            StringBuilder exceptions = new StringBuilder("\n");
             for(ConstraintViolation constraintViolation : constraintViolations) {
                 String fieldName = constraintViolation.getPropertyPath().toString().toUpperCase();
-                exceptions += fieldName + " " + constraintViolation.getMessage() + "\n";
+                exceptions.append(fieldName).append(" ").append(constraintViolation.getMessage()).append("\n");
             }
-            if(exceptions != "\n")throw new IllegalArgumentException(exceptions);
+            if(constraintViolations.size() > 0)throw new IllegalArgumentException(String.valueOf(exceptions));
 
             return new Product(this);
         }

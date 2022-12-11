@@ -4,7 +4,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class Lab4Test {
-    Employee.EmployeeBuilder empBuilder = new Employee.EmployeeBuilder("Oleg")
+    Employee.EmployeeBuilder empBuilder = new Employee.EmployeeBuilder("Oleg Smithers")
             .setSalary(6100.0)
             .setAddress("Holovna, 195")
             .setPhoneNumber("380950000000")
@@ -47,7 +47,7 @@ public class Lab4Test {
 
     @Test(dataProvider = "employeeProvider", expectedExceptions = IllegalArgumentException.class )
     public void testEmployeeBuilderName(Employee.EmployeeBuilder employeeBuilder) {
-        employeeBuilder.setName("sjvwe").build();
+        employeeBuilder.setName("acksjkcb").build();
     }
 
     @Test(dataProvider = "employeeProvider", expectedExceptions = IllegalArgumentException.class )
