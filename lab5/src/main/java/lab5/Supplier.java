@@ -1,7 +1,10 @@
 package lab5;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.constraints.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Supplier implements Comparable<Supplier>{
     private String name;
@@ -21,7 +24,8 @@ public class Supplier implements Comparable<Supplier>{
         this.name = builder.name;
         this.address = builder.address;
         this.contactPerson = builder.contactPerson;
-        this.products = builder.products;
+        this.products = new ArrayList<Product>();
+//        this.products = builder.products;
     }
 
     /**
@@ -74,11 +78,15 @@ public class Supplier implements Comparable<Supplier>{
         /**
          * @param name is mandatory, others are optional
          */
+        @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters long")
         private String name;
 
-        private String address = "none";
-        private Employee contactPerson = new Employee.EmployeeBuilder("none").build();
-        private List<Product> products = new ArrayList<>();
+        @NotBlank(message = "Address can't be empty")
+        private String address;
+
+        @NotNull(message = "Contact person can't be null")
+        private Employee contactPerson;
+
 
         /**
          * Builder constructor with required parameters
@@ -86,6 +94,16 @@ public class Supplier implements Comparable<Supplier>{
          */
         public SupplierBuilder(String name){
             this.name = name;
+        }
+
+        /**
+         * Builder name setter
+         * @param name
+         * @return object
+         */
+        public SupplierBuilder setName(String name) {
+            this.name = name;
+            return this;
         }
 
         /**
@@ -109,30 +127,20 @@ public class Supplier implements Comparable<Supplier>{
         }
 
         /**
-         * Builder products setter
-         * @param products
-         * @return object
-         */
-        public SupplierBuilder setProducts(List<Product> products){
-            this.products.addAll(products);
-            return this;
-        }
-
-        /**
-         * Builder product setter
-         * @param product
-         * @return object
-         */
-        public SupplierBuilder setProduct(Product product){
-            this.products.add(product);
-            return this;
-        }
-
-        /**
          * Builder build method
          * @return instance of Supplier class
          */
         public Supplier build(){
+            Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+            Set<ConstraintViolation<Supplier.SupplierBuilder>> constraintViolations = validator.validate(this);
+
+            StringBuilder exceptions = new StringBuilder("\n");
+            for(ConstraintViolation constraintViolation : constraintViolations) {
+                String fieldName = constraintViolation.getPropertyPath().toString().toUpperCase();
+                exceptions.append(fieldName).append(" ").append(constraintViolation.getMessage()).append("\n");
+            }
+            if(constraintViolations.size() > 0)throw new IllegalArgumentException(String.valueOf(exceptions));
+
             return new Supplier(this);
         }
 
@@ -178,100 +186,14 @@ public class Supplier implements Comparable<Supplier>{
     public void setContactPerson(Employee contactPerson) { this.contactPerson = contactPerson; }
 
     /**
-     * product setter
+     * products setter
      */
     public void setProducts(List<Product> products) { this.products = products; }
 
-    public static List<Product> getProductsWithPriceLessThan(Supplier s, double price){
-        return s.getProducts().stream()
-                .filter(product -> product.getPrice() < price)
-                .sorted()
-                .collect(Collectors.toList());
-    }
-
-    public static List<Product> getProductsWithPriceLessThanFor(Supplier s, double price){
-        List<Product> products = new ArrayList<>();
-        for(Product p : s.getProducts()){
-            if (p.getPrice() < price) products.add(p);
-        }
-        Collections.sort(products);
-        return products;
-    }
-
-    public static List<Product> getProductsWithQuantityLessThan(Supplier s, int quantity){
-        return s.getProducts().stream()
-                .filter(product -> product.getQuantity() < quantity)
-                .sorted(new ProductComparator())
-                .collect(Collectors.toList());
-    }
-
-    public static List<Product> getProductsWithQuantityLessThanFor(Supplier s, int quantity){
-        List<Product> products = new ArrayList<>();
-        for(Product p : s.getProducts()){
-            if (p.getQuantity() <quantity) products.add(p);
-        }
-        Collections.sort(products, new ProductComparator());
-        return products;
-    }
-
-    public static double getSumOfPricesIncreasedByRatio(Supplier s, double ratio){
-        return s.getProducts().stream()
-                .map(Product::getPrice)
-                .reduce(0.0, (total, price) -> total + price) * ratio;
-
-    }
-
-    public static double getSumOfPricesIncreasedByRatioFor(Supplier s, double ratio){
-        double sumOfPrice = 0.0;
-        for (Product p : s.getProducts()){
-            sumOfPrice += p.getPrice();
-        }
-        return sumOfPrice *= ratio;
-    }
-
-    public static int getQuantityOfProductsMoreExpensiveThan(Supplier s, double price){
-        return s.getProducts().stream()
-                .filter(product -> product.getPrice() > price)
-                .map(Product::getQuantity)
-                .reduce(0, (total, quantity) -> total + quantity);
-    }
-
-    public static int getQuantityOfProductsMoreExpensiveThanFor(Supplier s, double price){
-        int quantity = 0;
-        for (Product p: s.getProducts()) {
-            if(p.getPrice() > price){
-                quantity += p.getQuantity();
-            }
-        }
-        return quantity;
-    }
-
-    public static Product getProductByBarcode(Supplier s, int barcode){
-        return s.getProducts().stream()
-                .filter(product -> product.getBarcode() == barcode)
-                .findFirst()
-                .orElse(null);
-    }
-
-    public static Product getProductByBarcodeFor(Supplier s, int barcode){
-        for(Product p : s.getProducts()){
-            if(p.getBarcode() == barcode){
-                return p;
-            }
-        }
-        return null;
-    }
-    public static double getSumOfPrices(Supplier s){
-        return s.getProducts().stream()
-                .map(Product::getPrice)
-                .reduce(0.0, (total, price) -> total + price);
-    }
-
-    public static double getSumOfPricesFor(Supplier s){
-        double sum = 0.0;
-        for (Product p: s.getProducts()) {
-            sum += p.getPrice();
-        }
-        return sum;
+    /**
+     * product setter
+     */
+    public void setProduct(Product product){
+        this.products.add(product);
     }
 }

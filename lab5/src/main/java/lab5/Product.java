@@ -1,5 +1,14 @@
 package lab5;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.Set;
+
 public class Product implements Comparable<Product>{
     private final int barcode;
     private String name;
@@ -52,9 +61,7 @@ public class Product implements Comparable<Product>{
 
     @Override
     public int compareTo(Product p) {
-        if(Math.abs(this.price - p.price) < 0.00001) return 0;
-        else if(this.price > p.price) return 1;
-        else return -1;
+        return Double.compare(this.price, p.getPrice());
     }
 
     /**
@@ -64,12 +71,25 @@ public class Product implements Comparable<Product>{
         /**
          * params name, barcode are mandatory, others are optional
          */
-        private final int barcode;
+        @NotNull
+        @Min(value = 1, message = "Barcode must be greater than 0")
+        @Max(value = 100000, message = "Barcode must be less than 100000")
+        private int barcode;
+
+        @NotEmpty(message = "Name can't be empty")
         private String name;
 
-        private double price = 0.0;
-        private String category = "NULL";
-        private int quantity = 0;
+        @NotNull
+        @Min(value = 0, message = "Price can't be less than 0")
+        private double price;
+
+        @NotEmpty(message = "Category can't be empty")
+        private String category;
+
+        @NotNull
+        @Min(value = 0, message = "Quantity can't be less than 0")
+        @Max(value = 100000, message = "Quantity must be less than 100000")
+        private int quantity;
 
         /**
          * Builder constructor with required parameters
@@ -78,6 +98,26 @@ public class Product implements Comparable<Product>{
         public ProductBuilder(int barcode, String name){
             this.barcode= barcode;
             this.name = name;
+        }
+
+        /**
+         * Builder barcode setter
+         * @param barcode
+         * @return object
+         */
+        public ProductBuilder setBarcode(int barcode) {
+            this.barcode = barcode;
+            return this;
+        }
+
+        /**
+         * Builder name setter
+         * @param name
+         * @return object
+         */
+        public ProductBuilder setName(String name) {
+            this.name = name;
+            return this;
         }
 
         /**
@@ -115,6 +155,16 @@ public class Product implements Comparable<Product>{
          * @return instance of Employee class
          */
         public Product build(){
+            Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+            Set<ConstraintViolation<ProductBuilder>> constraintViolations = validator.validate(this);
+
+            StringBuilder exceptions = new StringBuilder("\n");
+            for(ConstraintViolation constraintViolation : constraintViolations) {
+                String fieldName = constraintViolation.getPropertyPath().toString().toUpperCase();
+                exceptions.append(fieldName).append(" ").append(constraintViolation.getMessage()).append("\n");
+            }
+            if(constraintViolations.size() > 0)throw new IllegalArgumentException(String.valueOf(exceptions));
+
             return new Product(this);
         }
 
@@ -174,5 +224,4 @@ public class Product implements Comparable<Product>{
      * quantity setter
      */
     public void setQuantity(int quantity) { this.quantity = quantity; }
-
 }

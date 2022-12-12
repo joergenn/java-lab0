@@ -1,6 +1,14 @@
 package lab5;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Objects;
+import java.util.Set;
 
 public class Employee {
     private String name;
@@ -66,12 +74,19 @@ public class Employee {
         /**
          * @param name is mandatory, others are optional
          */
+        @Pattern(regexp = "^[A-Z][a-z]*\\s[A-Z][a-z]*$", message = "Incorrect name")
         private String name;
 
-        private double salary = 0.0;
-        private String address = " ";
-        private String phoneNumber = " ";
-        private boolean isInsuranced = false;
+        @NotNull
+        @Min(value = 6000, message = "Salary can't be less than 6000")
+        private double salary;
+
+        @NotEmpty(message = "Address can't be empty")
+        private String address;
+
+        @Pattern(regexp = "^(380(50|95|99|67|66|68)[0-9]{7})$", message = "Incorrect phone number format")
+        private String phoneNumber;
+        private boolean isInsuranced;
 
         /**
          * Builder constructor with required parameters
@@ -81,6 +96,16 @@ public class Employee {
             this.name = name;
         }
 
+        /**
+         * Builder name setter
+         * @param name
+         * @return object
+         */
+
+        public EmployeeBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
         /**
          * Builder salary setter
          * @param salary
@@ -126,6 +151,15 @@ public class Employee {
          * @return instance of Employee class
          */
         public Employee build(){
+            Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+            Set<ConstraintViolation<EmployeeBuilder>> constraintViolations = validator.validate(this);
+            StringBuilder exceptions = new StringBuilder("\n");
+            for(ConstraintViolation constraintViolation : constraintViolations) {
+                String fieldName = constraintViolation.getPropertyPath().toString().toUpperCase();
+                exceptions.append(fieldName).append(" ").append(constraintViolation.getMessage()).append("\n");
+            }
+            if(constraintViolations.size() > 0)throw new IllegalArgumentException(String.valueOf(exceptions));
+
             return new Employee(this);
         }
 
