@@ -24,8 +24,9 @@ public class Main {
 //                .setCategory("gsdfg")
 //                .setQuantity(12410)
 //                .setPrice(10);
-//
-//        Product p = productBuilder.build();
+//        
+//        Product p = productBuilder.build(); test
+
 
         DatabaseService db = new DatabaseService("jdbc:postgresql://localhost:5432/javadb", "postgres", "rootzxc");
         db.connect();
